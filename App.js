@@ -1,7 +1,8 @@
 import React, { useState} from 'react';
-import { Button, FlatList, StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity} from 'react-native';
+import { Alert, Button, FlatList, StyleSheet, Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-import { v4 as uuidv4 } from 'uuid';
+import { uuid} from 'uuidv4';
+import { Input } from 'react-native-elements';
 
 
 export default function App() {
@@ -11,15 +12,17 @@ export default function App() {
    {id:2, post:"Réviser Native"},
   ]);
 
-const [task, setTask] = useState({});
+const [newtask, setTask] = useState('');
 
-function addTodo() {
-  // todo.id = uuidv4(); // ça ne fonctionne pas
-  setTodo(todos + addTask())
-}
+
 
 function addTask() {
-  setTask(task)
+  let post = {
+    id: uuid(),
+    post: newtask
+  }
+  setTodo([post, ...todos]);
+  setTask("");
 }
 
 function deleteTodo(id) {
@@ -29,13 +32,28 @@ function deleteTodo(id) {
   setTodo(remainingTodos);
 }
 
+function seeAlert() {
+  Alert.alert(
+    "Titre de l'alerte",
+    "Message de l'alerte",
+    [
+    {
+    text: "Annuler",
+    onPress: () => console.log("Appuyé sur annuler"),
+    style: "cancel"
+    },
+    { text: "OK", onPress: () => console.log("OK Pressed") }
+    ],
+    { cancelable: false }
+    );
+}
 
   return (
     <View style={styles.container}>
       <Text>Add a new Todo!</Text>
       
-      <TextInput style={styles.input} value={task} onChangeText={text => addTask(text)} />
-      <Button title="valider" onPress={addTodo} />
+      <Input style={styles.input} value={newtask} onChangeText={text => setTask(text)} label="nouvelle tâche" placeholder="entrez votre todo" />
+      <Button title="valider" onPress={addTask} />
 
       <FlatList
         data={todos}
@@ -48,7 +66,9 @@ function deleteTodo(id) {
         </View>
          }        
         // keyExtractor={item => item.id.toString()}
-      />    
+      />   
+
+      <Button title="Voir message" onPress={seeAlert} /> 
     </View>
   );
  }
