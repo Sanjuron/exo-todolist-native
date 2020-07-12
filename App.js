@@ -51,9 +51,10 @@ function seeAlert() {
   return (
     <View style={styles.container}>
       <Text style={styles.h1}>Votre Todo List</Text>
-      
       <Input style={styles.input} value={newtask} onChangeText={text => setTask(text)} placeholder="Entrez votre nouvelle tâche" />
+      <View style={styles.buttonContainer}>      
       <Button title="valider" onPress={addTask} style={styles.validation}/>
+      </View>
 
       <FlatList  
         style={styles.listing}      
@@ -62,7 +63,7 @@ function seeAlert() {
         <View style={styles.list}>
           <Text style={styles.todo} >{item.post}</Text>
           <TouchableOpacity onPress={() => {deleteTodo(item.id)}}>
-          <MaterialCommunityIcons name="delete" size={24} color="black" />
+          <MaterialCommunityIcons name="delete" size={24} color="#8D818C" />
           </TouchableOpacity>
         </View>
          }        
@@ -85,12 +86,15 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 32,
     fontWeight: "bold",
-    paddingTop: 8,
+    paddingTop: 20,
     paddingBottom: 14,
     color: "#FEFFFE",
+    borderBottomWidth: 3,
+    borderColor: "#FEFFFE",
+    marginBottom: 20,
   },
   validation:{
-    margin: 5,
+    padding: 20,
   },
   // listing:{
   //   borderStyle: "dotted",
@@ -118,7 +122,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#8D818C",
   },
-  inputStyle: {
-    backgroundColor: "white",
+  buttonContainer: {
+    margin: 20,
   },
 });
