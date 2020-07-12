@@ -52,7 +52,7 @@ function seeAlert() {
     <View style={styles.container}>
       <Text style={styles.h1}>Votre Todo List</Text>
       
-      <Input style={styles.input} inputStyle= value={newtask} onChangeText={text => setTask(text)} placeholder="Entrez votre nouvelle tâche" />
+      <Input style={styles.input} value={newtask} onChangeText={text => setTask(text)} placeholder="Entrez votre nouvelle tâche" />
       <Button title="valider" onPress={addTask} style={styles.validation}/>
 
       <FlatList  
