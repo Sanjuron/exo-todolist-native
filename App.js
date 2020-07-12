@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import { Alert, Button, FlatList, StyleSheet, Text, View, ScrollView, TouchableOpacity} from 'react-native';
+import { Alert, Button, FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { uuid} from 'uuidv4';
 import { Input } from 'react-native-elements';
@@ -50,16 +50,17 @@ function seeAlert() {
 
   return (
     <View style={styles.container}>
-      <Text>Add a new Todo!</Text>
+      <Text style={styles.h1}>Votre Todo List</Text>
       
-      <Input style={styles.input} value={newtask} onChangeText={text => setTask(text)} label="nouvelle tâche" placeholder="entrez votre todo" />
-      <Button title="valider" onPress={addTask} />
+      <Input style={styles.input} inputStyle= value={newtask} onChangeText={text => setTask(text)} placeholder="Entrez votre nouvelle tâche" />
+      <Button title="valider" onPress={addTask} style={styles.validation}/>
 
-      <FlatList
+      <FlatList  
+        style={styles.listing}      
         data={todos}
         renderItem={({item}) => 
         <View style={styles.list}>
-          <Text >{item.post}</Text>
+          <Text style={styles.todo} >{item.post}</Text>
           <TouchableOpacity onPress={() => {deleteTodo(item.id)}}>
           <MaterialCommunityIcons name="delete" size={24} color="black" />
           </TouchableOpacity>
@@ -73,28 +74,51 @@ function seeAlert() {
   );
  }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({  
   container: {
     flex: 1,
-    backgroundColor: '#33D1FF',
+    backgroundColor: '#B4B8C5',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  input: {
-    borderWidth: 1,
-    borderColor: '#777',
-    padding: 10,
+  h1: {
+    textAlign: "center",
+    fontSize: 32,
+    fontWeight: "bold",
+    paddingTop: 8,
+    paddingBottom: 14,
+    color: "#FEFFFE",
+  },
+  validation:{
     margin: 5,
   },
+  // listing:{
+  //   borderStyle: "dotted",
+  //   borderColor: "#8D818C",
+  //   borderWidth: 1,
+  //   borderTopWidth: 0,
+  //   borderBottomWidth: 0,
+  // },
   list:{
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     borderWidth: 2,
-    borderColor: "blue",
+    borderStyle: "dotted",
+    borderColor: "#A5A299",
+    backgroundColor:"#FEFFFE",
+    borderRadius: 8,
     padding: 15,
-    margin: 5,
+    margin: 8,
     width: 300,
-  }
+  },
+  todo:{
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: "#8D818C",
+  },
+  inputStyle: {
+    backgroundColor: "white",
+  },
 });
